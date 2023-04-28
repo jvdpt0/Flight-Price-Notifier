@@ -1,4 +1,3 @@
-import requests
 import os
 from dotenv import load_dotenv
 from twilio.rest import Client
@@ -18,4 +17,4 @@ class NotificationManager:
             from_= '+15074456521',
             to="+5584999533866"
         )
-        print(message.status)
+        print(message.sid)

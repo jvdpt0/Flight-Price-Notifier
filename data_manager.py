@@ -6,7 +6,7 @@ load_dotenv()
 SHEETY_API_KEY = os.environ.get('SHEETY_API_KEY')
 SHEETY_AUTH = os.environ.get('SHEETY_AUTH')
 SHEETY_APP_ID = os.environ.get('SHEETY_APP_ID')
-SHEETY_GET_ENDPOINT = os.environ.get('SHEETY_GET_ENDPOINT')
+SHEETY_PRICES_ENDPOINT = os.environ.get('SHEETY_PRICES_ENDPOINT')
 
 
 sheety_headers = {
@@ -19,7 +19,7 @@ class DataManager:
     #This class is responsible for talking to the Google Sheet.
 
     def get_flight_data(self):
-        response = requests.get(url=SHEETY_GET_ENDPOINT,headers=sheety_headers)
+        response = requests.get(url=SHEETY_PRICES_ENDPOINT,headers=sheety_headers)
         sheet_data = response.json()['prices']
         return sheet_data
     
@@ -31,5 +31,5 @@ class DataManager:
         'lowestPrice':flight['lowestPrice'],
         }
     }
-        response = requests.put(url=f"{SHEETY_GET_ENDPOINT}/{flight['id']}", json=flight_params, headers=sheety_headers)
+        response = requests.put(url=f"{SHEETY_PRICES_ENDPOINT}/{flight['id']}", json=flight_params, headers=sheety_headers)
         print(response.text)
